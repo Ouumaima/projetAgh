@@ -1,4 +1,4 @@
-package agh.projet;
+package agh.projet.bean;
 
 public class AdressBean {
 	
@@ -7,6 +7,14 @@ public class AdressBean {
 	private String ville;
 	private String codePostal;
 	
+	public AdressBean(String adress, String complementAdress, String ville,
+			String codePostal) {
+		super();
+		this.adress = adress;
+		ComplementAdress = complementAdress;
+		this.ville = ville;
+		this.codePostal = codePostal;
+	}
 	public String getAdress() {
 		return adress;
 	}

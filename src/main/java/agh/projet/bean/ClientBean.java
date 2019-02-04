@@ -1,4 +1,5 @@
-package agh.projet;
+package agh.projet.bean;
+
 
 public class ClientBean {
 
@@ -6,6 +7,15 @@ public class ClientBean {
 	private int code;
 	private String name;
 	private AdressBean adress;
+	
+	
+	public ClientBean(int id, int code, String name, AdressBean adress) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.adress = adress;
+	}
 	public int getId() {
 		return id;
 	}

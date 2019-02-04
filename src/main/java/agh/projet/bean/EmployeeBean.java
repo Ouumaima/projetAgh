@@ -1,17 +1,30 @@
-package agh.projet;
+package agh.projet.bean;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class EmployeeBean {
 	
+	
 	private int id;
 	private String firstName;
 	private String lastName;
 	private Date birthDate;
-	private List<ClientBean> clients;
+	private ArrayList<ClientBean> clients;
 	private List<String> technologies; 
 	private String currentPostion;
+	
+	public EmployeeBean(int id, String firstName, String lastName,Date birthDate, ArrayList<ClientBean> clients, String currentPostion) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthDate = birthDate;
+		this.clients = clients;
+		this.currentPostion = currentPostion;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -39,7 +52,7 @@ public class EmployeeBean {
 	public List<ClientBean> getClients() {
 		return clients;
 	}
-	public void setClients(List<ClientBean> clients) {
+	public void setClients(ArrayList<ClientBean> clients) {
 		this.clients = clients;
 	}
 	public List<String> getTechnologies() {
