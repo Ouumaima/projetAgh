@@ -1,20 +1,23 @@
-package agh.projet.bean;
+package bean;
 
 
-public class ClientBean {
+public class Client {
 
 	private int id;
 	private int code;
 	private String name;
-	private AdressBean adress;
-	
-	
-	public ClientBean(int id, int code, String name, AdressBean adress) {
+	private Adresse adresse;
+
+	public Client() {
+		super();
+	}
+	public Client(int id, int code, String name, Adresse adresse) {
 		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		this.adress = adress;
+		this.adresse = adresse;
+
 	}
 	public int getId() {
 		return id;
@@ -34,11 +37,11 @@ public class ClientBean {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public AdressBean getAdress() {
-		return adress;
+	public Adresse getAdresse() {
+		return this.adresse;
 	}
-	public void setAdress(AdressBean adress) {
-		this.adress = adress;
-	} 
+	public void setAdress(Adresse adresse) {
+		this.adresse = adresse;
+	}
 	
 }
