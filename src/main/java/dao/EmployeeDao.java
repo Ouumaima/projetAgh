@@ -1,51 +1,83 @@
 package dao;
 
+import java.util.List;
 
-import java.util.ArrayList;
-
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import bean.Employee;
 
-
-
-
 @Repository
 public class EmployeeDao {
 
-private ArrayList<Employee> listEmployee = new ArrayList<Employee>();
-	
-	public ArrayList<Employee> findAll() {
-		return  listEmployee;
+	SessionFactory sessionFactory;
+	EmployeeDao(SessionFactory sessionFactory){
+		this.sessionFactory=sessionFactory;
 	}
-	
+	public List<Employee> findAll() {
+		Session session = sessionFactory.openSession();
+		try {
+			List<Employee> employees = session.createQuery("FROM Employee e").list();
+			return employees;
+		}catch (Exception e) {
+			return null;
+		}finally {
+			session.close();			
+		}
+	}
+
+	public Employee findById(int id) {
+		Session session = sessionFactory.openSession();
+		try {
+			Employee e = session.get(Employee.class, id);
+			return e;
+		} catch (Exception e) {
+			return null;
+		}finally{
+			session.close();
+		}
+	}
+
 	public void add(Employee employee) {
-		listEmployee.add(employee);
-    }
-	
-	public void remove(Employee employee) {
-		listEmployee.remove(employee);
-    }
-	
-	public void removeById(int id) {
-		for (Employee e : listEmployee)
-			if (e.getId() == id  )
-				listEmployee.remove(e);
-    }
-	
-	public ArrayList<Employee> findById(int id) {
-		ArrayList<Employee> result = new ArrayList<Employee>();
-		for (Employee e : listEmployee)
-			if (e.getId() == id  )
-				result.add(e);
-		return  result;
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.save(employee);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}
 	}
-	
-	public ArrayList<Employee> findByFirstName(String firstName) {
-		ArrayList<Employee> result = new ArrayList<Employee>();
-		for (Employee e : listEmployee)
-			if (e.getFirstName().equals(firstName)  )
-				result.add(e);
-		return  result;
+
+	public Employee updateEmployee(int id, Employee employee) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Employee e = employee;
+			e.setId(id);
+			session.update(e);
+			tx.commit();
+			return e;
+		} catch (Exception e) {
+			tx.rollback();
+			return null;
+		}
 	}
+
+	public void deleteEmployeeById(int id) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Employee e = session.get(Employee.class, id);
+			session.delete(e);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}finally{
+			session.close();
+		}
+	}
+
 }

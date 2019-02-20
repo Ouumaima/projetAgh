@@ -1,10 +1,11 @@
 package controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,21 +22,34 @@ import bean.Adresse;
 @Path("/adresse")
 public class AdresseController {
 
-	@Autowired(required = true)
+	@Autowired
 	private AdresseService adresseService;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Adresse> getAdresses() {
+	public List<Adresse> getAdresses() {
 		return adresseService.getAll();
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{adresseId}")
+	public Adresse getAdresseById(@PathParam("adresseId") int adressId) {
+		return adresseService.getById(adressId);
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/{adresseId}")
+	public void updateAdresse(@PathParam("adresseId") int adressId, Adresse adr) {
+		 adresseService.update(adressId, adr);
 	}
 	
 	@POST
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public void CreateAdresse(Adresse adr) {
-		System.out.println("Post work !!!");
-		System.out.println("hhhh"+ adr.getAdresse());
 		adresseService.save(adr);
 
 	}
@@ -43,8 +57,9 @@ public class AdresseController {
 	@DELETE 
 	@Path("/{adr}")
     @Produces(MediaType.APPLICATION_JSON)
-    public void deleteById(@PathParam("adr") String adr) {
-		System.out.println("deleteById !!!");
-		adresseService.deleteByAdresse(adr);
+    public void deleteById(@PathParam("adr") int id) {
+		adresseService.remove(id);
 	}
+	
+	
 }

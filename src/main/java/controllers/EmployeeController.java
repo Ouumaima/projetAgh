@@ -1,11 +1,12 @@
 package controllers;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -14,19 +15,19 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import bean.Employee;
 import services.EmployeeService;
+import bean.Employee;
 
 @Component
 @Path("/employee")
 public class EmployeeController {
 
-	@Autowired(required = true)
+	@Autowired
 	private EmployeeService employeeService;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employeeService.getAll();
 	}
 
@@ -34,16 +35,21 @@ public class EmployeeController {
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public void CreateEmployee(Employee e) {
-		System.out.println("Post work !!!");
-		System.out.println("hhhh"+ e.getFirstName());
 		employeeService.save(e);
-
+	}
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	@Path("/{employeeId}")
+	public void updateEmployee(@PathParam("employeeId") int employeeId, Employee e) {
+		employeeService.updateEmployee(employeeId, e);
 	}
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{employeeId}")
-	public ArrayList<Employee> getEmployeeById(@PathParam("employeeId") int employeeId) {
+	public Employee getEmployeeById(@PathParam("employeeId") int employeeId) {
 		return employeeService.getById(employeeId);
 	}
 	
@@ -51,7 +57,6 @@ public class EmployeeController {
 	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteById(@PathParam("id") int id) {
-		System.out.println(".deleteById !!!");
 		employeeService.deleteById(id);
 	}
 

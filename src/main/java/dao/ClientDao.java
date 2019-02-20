@@ -1,7 +1,10 @@
 package dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import bean.Client;
@@ -9,40 +12,72 @@ import bean.Client;
 @Repository
 public class ClientDao {
 
-private ArrayList<Client> listClient = new ArrayList<Client>();
+	SessionFactory sessionFactory;
 	
-	public ArrayList<Client> findAll() {
-		return  listClient;
+	ClientDao(SessionFactory sessionFactory){
+		this.sessionFactory=sessionFactory;
+	}
+	
+	public List<Client> findAll() {
+		Session session = sessionFactory.openSession();
+		try {
+			List<Client> clients = session.createQuery("FROM Client c").list();
+			return clients;
+		}catch (Exception e) {
+			return null;
+		}finally {
+			session.close();			
+		}
 	}
 	
 	public void add(Client client) {
-		listClient.add(client);
-    }
-	
-	public void remove(Client client) {
-		listClient.remove(client);
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.save(client);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}
     }
 	
 	public void removeById(int id) {
-		for (Client c : listClient)
-			if (c.getId() == id )
-				listClient.remove(c);
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Client c = session.get(Client.class, id);
+			session.delete(c);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}
     }
 	
-	public ArrayList<Client> findById(int id) {
-		ArrayList<Client> result = new ArrayList<Client>();
-		for (Client c : listClient)
-			if (c.getId() == id  )
-				result.add(c);
-		return  result;
+	public Client findById(int id) {
+		Session session = sessionFactory.openSession();
+		try {
+			Client c = session.get(Client.class, id);
+			return c;
+		} catch (Exception e) {
+			return null;
+		}finally{
+			session.close();
+		}
 	}
-	
-	public ArrayList<Client> findByName(String name) {
-		ArrayList<Client> result = new ArrayList<Client>();
-		for (Client c : listClient)
-			if (c.getName().equals(name)  )
-				result.add(c);
-		return  result;
+
+	public void updateClient(int id, Client client) {
+		Session session = sessionFactory.openSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Client c = client;
+			c.setId(id);
+			session.update(c);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		}finally{
+			session.close();
+		}
 	}
 	
 }

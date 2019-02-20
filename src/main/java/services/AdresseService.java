@@ -1,12 +1,14 @@
 package services;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bean.Adresse;
- import dao.AdresseDao;
+import bean.Client;
+import dao.AdresseDao;
 
 @Service
 public class AdresseService {
@@ -18,15 +20,20 @@ public class AdresseService {
 			adresse.add(a);
 	    }
 		
-		public void remove(Adresse a) {
-			adresse.remove(a);
+		public void remove(int id) {
+			adresse.deleteById(id);
 	    }
 		
-		public ArrayList<Adresse> getAll(){
+		public List<Adresse> getAll(){
 			 return adresse.findAll();
 		}
-
-		public void deleteByAdresse(String adr){
-			adresse.removeByAdresse(adr);
+		
+		public Adresse getById(int id){
+			 return adresse.findById(id);
 		}
+		
+		public void update(int id, Adresse adr){
+			adresse.updateAdresse(id, adr);
+		}
+
 }
