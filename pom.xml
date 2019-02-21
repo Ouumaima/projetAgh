@@ -16,7 +16,6 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<spring.version>5.0.10.RELEASE</spring.version>
 		<jersey.version>1.19.3</jersey.version>
-		<jackson.version>1.9.10</jackson.version>
 		<servlet.version>3.1.0</servlet.version>
 		<hibernate.version>5.5.6.Final</hibernate.version>
 		<h2.version>1.4.194</h2.version>
@@ -50,17 +49,26 @@
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-bundle</artifactId>
+			<artifactId>jersey-server</artifactId>
+			<version>${jersey.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-spring</artifactId>
-			<version>1.19.3</version>
+			<version>${jersey.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.springframework</groupId>
 					<artifactId>spring</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>spring-aop</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.springframework</groupId>
@@ -78,47 +86,8 @@
 					<groupId>org.springframework</groupId>
 					<artifactId>spring-context</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>org.springframework</groupId>
-					<artifactId>spring-aop</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jersey</groupId>
-					<artifactId>jersey-server</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jersey</groupId>
-					<artifactId>jersey-servlet</artifactId>
-				</exclusion>
 			</exclusions>
 		</dependency>
-
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-xc</artifactId>
-			<version>1.9.10</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-			<version>1.9.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-
-
-
-
-
-
-
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search-orm</artifactId>

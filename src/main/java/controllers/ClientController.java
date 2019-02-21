@@ -34,8 +34,6 @@ public class ClientController {
 	@Consumes({MediaType.APPLICATION_JSON})
 	@Produces({MediaType.APPLICATION_JSON})
 	public void CreateClient(Client c) {
-		System.out.println("Post work !!!");
-		System.out.println("hhhh"+ c.getName());
 		clientService.save(c);
 	}
 	
@@ -58,7 +56,6 @@ public class ClientController {
 	@Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public void deleteById(@PathParam("id") int id) {
-		System.out.println("deleteById !!!");
 		clientService.deleteById(id);
 	}
 }
