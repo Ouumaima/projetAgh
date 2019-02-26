@@ -8,7 +8,6 @@ import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 import bean.Adresse;
-import bean.Client;
 
 @Repository
 public class AdresseDao {
