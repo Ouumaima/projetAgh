@@ -24,14 +24,13 @@ import bean.Employee;
 @Path("/employee")
 public class EmployeeController {
 
-	static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
 	@Autowired
 	private EmployeeService employeeService;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Employee> getEmployees() {
-	    logger.debug("Hello world.");
+		System.out.println("omaima");
 	    return employeeService.getAll();
 	}
 
