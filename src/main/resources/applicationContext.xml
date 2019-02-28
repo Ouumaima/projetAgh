@@ -17,7 +17,10 @@
 	<context:component-scan base-package="services" />
 	<context:component-scan base-package="dao" />
 
-	<bean id="EmployeeLogger" class="loggers.EmployeeLogger" />
+	<bean id="EmployeeLogger" class="aspects.loggers.EmployeeLogger" />
+	<bean id="AdresseLogger" class="aspects.loggers.AdresseLogger" />
+	<bean id="ClientLogger" class="aspects.loggers.ClientLogger" />
+	
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.h2.Driver" />

@@ -1,4 +1,4 @@
-package loggers;
+package aspects.loggers;
 
 import java.util.Arrays;
 
@@ -8,17 +8,17 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controllers.EmployeeController;
+import controllers.AdresseController;
 
 @Aspect
-public class EmployeeLogger {
+public class AdresseLogger {
 	
-	static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+	static final Logger logger = LoggerFactory.getLogger(AdresseController.class);
 	
-	@After("execution(* controllers.EmployeeController.*(..))")
+	@After("execution(* controllers.AdresseController.*(..))")
 	public void createLog(JoinPoint joinPoint){
 		logger.debug("Methode " + joinPoint.getSignature().toString()+ "is running");
 		logger.debug("Argument Methode " + Arrays.toString(joinPoint.getArgs()));
 	}
-	
+
 }
