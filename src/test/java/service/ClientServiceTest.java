@@ -46,8 +46,8 @@ public class ClientServiceTest {
 		List<Client> clientsResults = clientService.getAll();
 
 		// then
-		Assertions.assertThat(clientsExpected.get(0).getName()).isEqualTo(clientsResults.get(0).getName());
-		Assertions.assertThat(clientsExpected.get(1).getName()).isEqualTo(clientsResults.get(1).getName());
+		Assertions.assertThat(clientsExpected.get(0)).isEqualTo(clientsResults.get(0));
+		Assertions.assertThat(clientsExpected.get(1)).isEqualTo(clientsResults.get(1));
 
 	}
 
@@ -60,7 +60,7 @@ public class ClientServiceTest {
 		Client clientResults = clientService.getById(1);
 
 		// then
-		Assertions.assertThat(clientsExpected.get(0).getName()).isEqualTo(clientResults.getName());
+		Assertions.assertThat(clientsExpected.get(0)).isEqualTo(clientResults);
 
 	}
 	

@@ -101,4 +101,69 @@ public class Employee {
 	public void setCurrentPostion(String currentPostion) {
 		this.currentPostion = currentPostion;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((birthDate == null) ? 0 : birthDate.hashCode());
+		result = prime * result + ((clients == null) ? 0 : clients.hashCode());
+		result = prime * result
+				+ ((currentPostion == null) ? 0 : currentPostion.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + id;
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result
+				+ ((technologies == null) ? 0 : technologies.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (birthDate == null) {
+			if (other.birthDate != null)
+				return false;
+		} else if (!birthDate.equals(other.birthDate))
+			return false;
+		if (clients == null) {
+			if (other.clients != null)
+				return false;
+		} else if (!clients.equals(other.clients))
+			return false;
+		if (currentPostion == null) {
+			if (other.currentPostion != null)
+				return false;
+		} else if (!currentPostion.equals(other.currentPostion))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (id != other.id)
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (technologies == null) {
+			if (other.technologies != null)
+				return false;
+		} else if (!technologies.equals(other.technologies))
+			return false;
+		return true;
+	}
+	
+	
 }

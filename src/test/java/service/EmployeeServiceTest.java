@@ -51,8 +51,8 @@ public class EmployeeServiceTest {
 		List<Employee> employeesResults = employeeService.getAll();
 
 		// then
-		Assertions.assertThat(employeesExpected.get(0).getFirstName()).isEqualTo(employeesResults.get(0).getFirstName());
-		Assertions.assertThat(employeesExpected.get(1).getFirstName()).isEqualTo(employeesResults.get(1).getFirstName());
+		Assertions.assertThat(employeesExpected.get(0)).isEqualTo(employeesResults.get(0));
+		Assertions.assertThat(employeesExpected.get(1)).isEqualTo(employeesResults.get(1));
 
 	}
 
@@ -65,22 +65,8 @@ public class EmployeeServiceTest {
 		Employee employeeResults = employeeService.getById(1);
 
 		// then
-		Assertions.assertThat(employeesExpected.get(0).getFirstName()).isEqualTo(employeeResults.getFirstName());
+		Assertions.assertThat(employeesExpected.get(0)).isEqualTo(employeeResults);
 
 	}
-	
-//	@Test
-//	public void testUpdaye() {
-//		
-//		Employee e = new Employee(1, "oumaima", "ben arab", null ,"developer");
-//		when(employeeDao.updateEmployee(1, e)).thenReturn(employeesExpected.get(1));
-//		
-//		// when
-//		Employee employeeResults = employeeService.getById(1);
-//
-//		// then
-//		Assertions.assertThat(employeesExpected.get(0).getFirstName()).isEqualTo(employeeResults.getFirstName());
-//
-//	}
 	
 }
