@@ -21,8 +21,12 @@ import bean.Client;
 @Component
 @Path("/client")
 public class ClientController {
-	@Autowired(required = true)
+	
 	private ClientService clientService;
+	
+		public ClientController(ClientService clientService) {
+		this.clientService = clientService;
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

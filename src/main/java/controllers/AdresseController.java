@@ -22,8 +22,11 @@ import bean.Adresse;
 @Path("/adresse")
 public class AdresseController {
 
-	@Autowired
 	private AdresseService adresseService;
+	
+	public AdresseController(AdresseService adresseService) {
+		this.adresseService = adresseService;
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)

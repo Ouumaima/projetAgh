@@ -1,21 +1,21 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bean.Adresse;
-import bean.Client;
 import dao.AdresseDao;
 
 @Service
 public class AdresseService {
 	
-		@Autowired
 		private AdresseDao adresse;
-		
+
+		public AdresseService(AdresseDao adresse) {
+			this.adresse = adresse;
+		}
+
 		public void save(Adresse a) {
 			adresse.add(a);
 	    }

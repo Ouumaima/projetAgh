@@ -8,17 +8,14 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import controllers.AdresseController;
-
 @Aspect
-public class AdresseLogger {
+public class AspectLogger {
+
+static final Logger logger = LoggerFactory.getLogger(AspectLogger.class);
 	
-	static final Logger logger = LoggerFactory.getLogger(AdresseController.class);
-	
-	@After("execution(* controllers.AdresseController.*(..))")
+	@After("execution(* controllers.*.*(..))")
 	public void createLog(JoinPoint joinPoint){
 		logger.debug("Methode " + joinPoint.getSignature().toString()+ "is running");
 		logger.debug("Argument Methode " + Arrays.toString(joinPoint.getArgs()));
 	}
-
 }

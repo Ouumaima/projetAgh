@@ -11,9 +11,14 @@ import dao.ClientDao;
 @Service
 public class ClientService {
 
-	@Autowired
 	private ClientDao client ;
 	
+
+	
+
+	public ClientService(ClientDao client) {
+		this.client = client;
+	}
 
 	public List<Client> getAll(){
 		 return client.findAll();

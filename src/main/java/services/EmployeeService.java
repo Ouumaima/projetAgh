@@ -12,9 +12,11 @@ import dao.EmployeeDao;
 @Service
 public class EmployeeService {
 	
-	@Autowired
 	private EmployeeDao employee ;
 	
+	public EmployeeService(EmployeeDao employee) {
+		this.employee = employee;
+	}
 
 	public List<Employee> getAll(){
 		 return employee.findAll();

@@ -12,8 +12,6 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -24,13 +22,15 @@ import bean.Employee;
 @Path("/employee")
 public class EmployeeController {
 
-	@Autowired
 	private EmployeeService employeeService;
+
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Employee> getEmployees() {
-		System.out.println("omaima");
 	    return employeeService.getAll();
 	}
 
